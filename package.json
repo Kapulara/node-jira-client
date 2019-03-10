@@ -1,18 +1,19 @@
 {
-  "name": "jira-client",
-  "version": "6.7.0",
+  "name": "@bartvanvliet/jira-client",
+  "version": "6.7.1",
   "description": "Wrapper for the JIRA API",
   "author": "Steven Surowiec <steven.surowiec@gmail.com>",
+  "private": false,
   "contributors": [
     "Chris Moultrie <chris@moultrie.org>",
     "Lucas Vogelsang <l@lucasvo.com>",
     "Matt Smith <mtscout6+node-jira@gmail.com>",
     "Anson Wayman <kanoyugoro+node-jira@gmail.com>"
   ],
-  "homepage": "http://github.com/jira-node/node-jira-client",
+  "homepage": "http://github.com/kapulara/node-jira-client",
   "repository": {
     "type": "git",
-    "url": "http://github.com/jira-node/node-jira-client"
+    "url": "http://github.com/kapulara/node-jira-client"
   },
   "engine": {
     "node": ">=4.2.2"
@@ -57,10 +58,5 @@
     "eslint-plugin-mocha": "^5.2.1",
     "mocha": "^5.2.0",
     "release-script": "^1.0.1"
-  },
-  "release-script": {
-    "docsRepo": "git@github.com:jira-node/jira-node.github.io.git",
-    "docsRoot": "docs/",
-    "tmpDocsRepo": "tmp-docs-repo"
   }
 }
