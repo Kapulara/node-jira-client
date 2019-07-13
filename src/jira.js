@@ -27,6 +27,10 @@ export default class JiraApi {
     this.greenhopperVersion = options.greenhopperVersion || '1.0';
     this.baseOptions = {};
 
+    if (options.ca) {
+      this.baseOptions.ca = options.ca;
+    }
+
     if (options.oauth && options.oauth.consumer_key && options.oauth.access_token) {
       this.baseOptions.oauth = {
         consumer_key: options.oauth.consumer_key,
@@ -299,6 +303,21 @@ export default class JiraApi {
       },
     })));
   }
+
+  /**
+   * @name downloadAttachment
+   * @function
+   * Download an attachment
+   * [Jira Doc](http://docs.atlassian.com/jira/REST/latest/#id288524)
+   * @param {object} attachment - the attachment
+   */
+  downloadAttachment(attachment) {
+    return this.doRequest(this.makeRequestHeader(this.makeUri({
+      pathname: `/attachment/${attachment.id}/${attachment.filename}`,
+      intermediatePath: '/secure',
+    }), { json: false, encoding: null }));
+  }
+
 
   /**
    * @name getUnresolvedIssueCount

@@ -15,6 +15,7 @@ function getOptions(options) {
     oauth: actualOptions.oauth || null,
     intermediatePath: actualOptions.intermediatePath,
     bearer: actualOptions.bearer || null,
+    ca: actualOptions.ca || null,
   };
 }
 
@@ -95,6 +96,16 @@ describe('Jira API Tests', () => {
       );
 
       expect(jira.strictSSL).to.equal(false);
+    });
+
+    it('should allow the user to pass in a certificate authority', () => {
+      const jira = new JiraApi(
+        getOptions({
+          ca: 'fakestring',
+        }),
+      );
+
+      expect(jira.baseOptions.ca).to.equal('fakestring');
     });
   });
 
@@ -389,6 +400,11 @@ describe('Jira API Tests', () => {
     it('findIssue hits proper url with fields and fieldsByKeys', async () => {
       const result = await dummyURLCall('findIssue', ['PK-100', null, 'transitions,changelog', null, true]);
       result.should.eql('http://jira.somehost.com:8080/rest/api/2.0/issue/PK-100?expand=&fields=transitions,changelog&properties=*all&fieldsByKeys=true');
+    });
+
+    it('downloadAttachment hits proper url with attachment id and filename', async () => {
+      const result = await dummyURLCall('downloadAttachment', [{ id: '123456', filename: 'attachment.txt' }]);
+      result.should.eql('http://jira.somehost.com:8080/secure/attachment/123456/attachment.txt');
     });
 
     it('getUnresolvedIssueCount hits proper url', async () => {
